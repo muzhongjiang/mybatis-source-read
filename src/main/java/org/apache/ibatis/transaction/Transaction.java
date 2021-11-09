@@ -19,6 +19,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
+ *
+ *  事务，包装了一个Connection, 包含commit,rollback,close方法
+ *  在 MyBatis 中有两种事务管理器类型(也就是 type="[JDBC|MANAGED]"):
+ *
+ *
  * Wraps a database connection.
  * Handles the connection lifecycle that comprises: its creation, preparation, commit/rollback and close.
  *
