@@ -16,6 +16,8 @@
 package org.apache.ibatis.scripting.xmltags;
 
 /**
+ * if SQL节点
+ *
  * @author Clinton Begin
  */
 public class IfSqlNode implements SqlNode {
@@ -31,6 +33,7 @@ public class IfSqlNode implements SqlNode {
 
   @Override
   public boolean apply(DynamicContext context) {
+    //如果满足条件，则apply，并返回true：
     if (evaluator.evaluateBoolean(test, context.getBindings())) {
       contents.apply(context);
       return true;

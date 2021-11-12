@@ -15,13 +15,10 @@
  */
 package org.apache.ibatis.io;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -32,10 +29,9 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
-import org.apache.ibatis.logging.Log;
-import org.apache.ibatis.logging.LogFactory;
-
 /**
+ *  默认的VFS，提供了读取jar包的方法
+ *
  * A default implementation of {@link VFS} that works for most application servers.
  *
  * @author Ben Gunter
@@ -65,6 +61,7 @@ public class DefaultVFS extends VFS {
         if (log.isDebugEnabled()) {
           log.debug("Listing " + url);
         }
+        //用JDK自带的JarInputStream来读取jar包：
         resources = listResources(new JarInputStream(is), path);
       } else {
         List<String> children = new ArrayList<>();

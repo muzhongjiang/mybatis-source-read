@@ -83,6 +83,7 @@ public class Reflector {
                 .findAny().ifPresent(constructor -> this.defaultConstructor = constructor);
     }
 
+    //addGetMethods() 方法和 addSetMethods() 方法，它们分别用来解析传入 Class 类中的 getter方法和 setter() 方法，两者的逻辑十分相似
     private void addGetMethods(Class<?> clazz) {
         Map<String, List<Method>> conflictingGetters = new HashMap<>();
         Method[] methods = getClassMethods(clazz);
@@ -123,6 +124,7 @@ public class Reflector {
         }
     }
 
+    //addGetMethods() 方法和 addSetMethods() 方法，它们分别用来解析传入 Class 类中的 getter方法和 setter() 方法，两者的逻辑十分相似
     private void addGetMethod(String name, Method method, boolean isAmbiguous) {
         MethodInvoker invoker = isAmbiguous
                 ? new AmbiguousMethodInvoker(method, MessageFormat.format(

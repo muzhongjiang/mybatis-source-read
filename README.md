@@ -1,7 +1,21 @@
 MyBatis-3.5.7 源码阅读
 =====================================
+Mybatis 三层结构设计：  
+![Image 三层结构](./images/mybatis.png)
 
-## 1.日志
+
+
+## 类型转换模块 
+1、可以在 mybatis-config.xml 配置文件中通过 <typeAliase> 标签为一个类定义一个别名，这里用到的 “别名机制” 就是由 MyBatis 基础支撑层中的类型转换模块实现的。     
+2、除了“别名机制”，类型转换模块还实现了 MyBatis 中 JDBC 类型与 Java 类型之间的相互转换，这一功能在绑定实参、映射 ResultSet 场景中都有所体现：      
+    2.1、在 SQL 模板绑定用户传入实参的场景中，类型转换模块会将 Java 类型数据转换成 JDBC 类型数据。       
+    2.2、在将 ResultSet 映射成结果对象的时候，类型转换模块会将 JDBC 类型数据转换成 Java 类型数据。        
+    具体情况如图所示：  ![Image 类型转换](./images/TypeHandler.png)  
+    
+    
+    
+    
+## 日志
 org.apache.ibatis.logging
 org.apache.ibatis.logging.commons
 org.apache.ibatis.logging.jdbc
@@ -14,10 +28,14 @@ org.apache.ibatis.logging.stdout
 
 * [适配器设计模式](http://www.cnblogs.com/liuling/archive/2013/04/12/adapter.html)
 
-## 2.异常
+
+
+
+## 异常
 org.apache.ibatis.exceptions
 
-## 3.缓存
+
+## 缓存
 org.apache.ibatis.cache
 org.apache.ibatis.cache.decorators
 org.apache.ibatis.cache.impl

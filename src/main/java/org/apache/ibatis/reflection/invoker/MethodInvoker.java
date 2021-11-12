@@ -15,12 +15,15 @@
  */
 package org.apache.ibatis.reflection.invoker;
 
+import org.apache.ibatis.reflection.Reflector;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.apache.ibatis.reflection.Reflector;
-
 /**
+ * 在 Reflector 对象的初始化过程中，所有属性的 getter/setter 方法都会被封装成 MethodInvoker 对象，
+ * 没有 getter/setter 的字段也会生成对应的 Get/SetFieldInvoker 对象。
+ *
  * @author Clinton Begin
  */
 public class MethodInvoker implements Invoker {

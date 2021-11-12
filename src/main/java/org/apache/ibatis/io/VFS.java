@@ -15,6 +15,9 @@
  */
 package org.apache.ibatis.io;
 
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -24,10 +27,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.ibatis.logging.Log;
-import org.apache.ibatis.logging.LogFactory;
-
 /**
+ *
+ * 虚拟文件系统(VFS),用来读取服务器里的资源
+ *
  * Provides a very simple API for accessing resources within an application server.
  *
  * @author Ben Gunter
