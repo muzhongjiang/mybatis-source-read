@@ -55,7 +55,7 @@ public class SqlRunner {
      */
     public Map<String, Object> selectOne(String sql, Object... args) throws SQLException {
         List<Map<String, Object>> results = selectAll(sql, args);
-        if (results.size() != 1) {
+        if (results.size() != 1) {//必须等于"1",不能是null ！ mybatis-plus中可以为null
             throw new SQLException("Statement returned " + results.size() + " results where exactly one (1) was expected.");
         }
         return results.get(0);

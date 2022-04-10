@@ -15,11 +15,6 @@
  */
 package org.apache.ibatis.submitted.language;
 
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.ibatis.builder.BuilderException;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.SqlSource;
@@ -31,7 +26,14 @@ import org.apache.velocity.runtime.RuntimeServices;
 import org.apache.velocity.runtime.RuntimeSingleton;
 import org.apache.velocity.runtime.parser.node.SimpleNode;
 
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
+ * 只是一个测试用例。 不是真正的 Velocity 实现。
+ *
  * Just a test case. Not a real Velocity implementation.
  */
 public class VelocitySqlSource implements SqlSource {

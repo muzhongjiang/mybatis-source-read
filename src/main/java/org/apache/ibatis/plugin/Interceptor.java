@@ -12,6 +12,9 @@
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
+ *
+ *
+ *    拦截器
  */
 package org.apache.ibatis.plugin;
 
@@ -21,13 +24,13 @@ import java.util.Properties;
  * @author Clinton Begin
  */
 public interface Interceptor {
-
+  //拦截：
   Object intercept(Invocation invocation) throws Throwable;
-
+  //插入：
   default Object plugin(Object target) {
     return Plugin.wrap(target, this);
   }
-
+  //设置属性：
   default void setProperties(Properties properties) {
     // NOP
   }

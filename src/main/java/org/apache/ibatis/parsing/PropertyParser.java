@@ -18,6 +18,9 @@ package org.apache.ibatis.parsing;
 import java.util.Properties;
 
 /**
+ *
+ * 属性解析器
+ *
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
@@ -56,6 +59,7 @@ public class PropertyParser {
     return parser.parse(string);
   }
 
+  //就是一个map，用相应的value替换key
   private static class VariableTokenHandler implements TokenHandler {
     private final Properties variables;
     private final boolean enableDefaultValue;

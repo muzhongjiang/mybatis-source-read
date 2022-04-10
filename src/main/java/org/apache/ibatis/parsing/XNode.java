@@ -15,30 +15,37 @@
  */
 package org.apache.ibatis.parsing;
 
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.function.Supplier;
 
-import org.w3c.dom.CharacterData;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 /**
+ *
+ * 对org.w3c.dom.Node的包装
+ *
  * @author Clinton Begin
  */
 public class XNode {
 
+  //org.w3c.dom.Node
   private final Node node;
+
+  //以下都是预先把信息都解析好，放到map等数据结构中（内存中）：
   private final String name;
+
   private final String body;
   private final Properties attributes;
   private final Properties variables;
+
+  //XPathParser方便xpath解析：
   private final XPathParser xpathParser;
 
+  //在构造时就把一些信息（属性，body）全部解析好，以便我们直接通过getter函数取得：
   public XNode(XPathParser xpathParser, Node node, Properties variables) {
     this.xpathParser = xpathParser;
     this.node = node;
@@ -52,6 +59,7 @@ public class XNode {
     return new XNode(xpathParser, node, variables);
   }
 
+  //调用Node.getParentNode,如果取到，包装一下，返回XNode：
   public XNode getParent() {
     Node parent = node.getParentNode();
     if (!(parent instanceof Element)) {
@@ -61,7 +69,9 @@ public class XNode {
     }
   }
 
+  //取得完全的path (a/b/c)
   public String getPath() {
+    //循环依次取得节点的父节点，然后倒序打印,也可以用一个堆栈实现：
     StringBuilder builder = new StringBuilder();
     Node current = node;
     while (current instanceof Element) {
@@ -81,6 +91,7 @@ public class XNode {
       if (current != this) {
         builder.insert(0, "_");
       }
+      //先拿id，拿不到再拿value,再拿不到拿property：
       String value = current.getStringAttribute("id",
           current.getStringAttribute("value",
               current.getStringAttribute("property", (String) null)));
